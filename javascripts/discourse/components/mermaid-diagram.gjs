@@ -72,10 +72,16 @@ export default class MermaidDiagram extends Component {
 
   @action
   toggleZoom(event) {
-    event.preventDefault();
     if (!this.args.enableZoom) {
       return;
     }
+
+    // Don't interfere with mermaid's native click links
+    if (event.target.closest("a")) {
+      return;
+    }
+
+    event.preventDefault();
     this.zoomed = !this.zoomed;
   }
 
